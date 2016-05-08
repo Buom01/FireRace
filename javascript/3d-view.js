@@ -189,7 +189,7 @@
 
       loader.load(
           // resource URL
-          'http://www.bastien-adam.tk/course-en-cours/voiture.dae',
+          'https://www.bastien-adam.tk/course-en-cours/voiture.dae',
           // Function when resource is loaded
           function(collada) {
               voiture = collada.scene;
@@ -235,13 +235,13 @@
             var loader = new THREE.AudioLoader(LoadingManager);
 
             loader.load(
-                'http://www.bastien-adam.tk/course-en-cours/start.wav',
+                'https://www.bastien-adam.tk/course-en-cours/start.wav',
                 function(audioBuffer) {
                     startSound.setBuffer(audioBuffer);
                 }
             );
             loader.load(
-                'http://www.bastien-adam.tk/course-en-cours/loop.wav',
+                'https://www.bastien-adam.tk/course-en-cours/loop.wav',
                 function(audioBuffer) {
                     loopSound.setBuffer(audioBuffer);
                 }
