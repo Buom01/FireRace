@@ -28,9 +28,9 @@ loadedCallback = function() {
     }
 };
 
-$script(['javascript/lib/jquery/jquery-2.2.2.min.js'], function() {
+$script(['javascript/lib/jquery/jquery-2.2.3.min.js'], function() {
   loadedCallback();
-    $script(['javascript/lib/jquery/jquery.lettering.js', 'javascript/lib/jquery/jquery.textillate.js'], function(){
+    $script(['javascript/lib/jquery/jquery.lettering.min.js', 'javascript/lib/jquery/jquery.textillate.js'], function(){
       loadedCallback();
     });
     if(!WebGlWorks){
