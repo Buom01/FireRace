@@ -74,6 +74,7 @@
           'lmcity_up.jpg', 'lmcity_dn.jpg',
           'lmcity_rt.jpg', 'lmcity_lf.jpg'
       ], function() {
+      console.log("textureCube:ok");
           textureCubeSky = textureCube.clone();
           textureCubeSky.needsUpdate = true;
           textureCubeSky.mapping = THREE.CubeRefractionMapping;
@@ -135,6 +136,7 @@
 
       var FontLoader = new THREE.FontLoader(LoadingManager);
       FontLoader.load('javascript/lib/threejs/helvetiker_bold.typeface.js', function(font) {
+              console.log("font:ok");
           informations.forEach(function() {
               return function(data) {
                   //Ligne
@@ -238,12 +240,14 @@
                 'https://www.bastien-adam.tk/course-en-cours/start.wav',
                 function(audioBuffer) {
                     startSound.setBuffer(audioBuffer);
+                    console.log("startSound:ok");
                 }
             );
             loader.load(
                 'https://www.bastien-adam.tk/course-en-cours/loop.wav',
                 function(audioBuffer) {
                     loopSound.setBuffer(audioBuffer);
+                                        console.log("loopSound:ok");
                 }
             );
 

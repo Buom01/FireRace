@@ -42,11 +42,15 @@ $script(['javascript/lib/jquery/jquery-2.2.3.min.js'], function() {
 if (WebGlWorks) {
     $script("javascript/lib/threejs/three.min.js", function() {
       loadedCallback();
+      console.log("threejs:ok");
         $script(["javascript/lib/threejs/ColladaLoader.js", "javascript/lib/threejs/OrbitControls.js"], function() {
           loadedCallback();
+                console.log("threejsAddons:ok");
             $script('javascript/3d-view.js', function() {
               loadedCallback();
+                              console.log("3dView:ok");
               $script(["javascript/main.js"], function(){
+                                              console.log("mainScript:ok");
                   loadedCallback();
               });
             });
