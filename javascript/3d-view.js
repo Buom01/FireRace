@@ -237,14 +237,14 @@
             var loader = new THREE.AudioLoader(LoadingManager);
 
             loader.load(
-                'https://www.bastien-adam.tk/course-en-cours/start.wav',
+                'https://www.bastien-adam.tk/course-en-cours/start.mp3',
                 function(audioBuffer) {
                     startSound.setBuffer(audioBuffer);
                     console.log("startSound:ok");
                 }
             );
             loader.load(
-                'https://www.bastien-adam.tk/course-en-cours/loop.wav',
+                'https://www.bastien-adam.tk/course-en-cours/loop.mp3',
                 function(audioBuffer) {
                     loopSound.setBuffer(audioBuffer);
                                         console.log("loopSound:ok");
