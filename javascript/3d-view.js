@@ -5,10 +5,10 @@
   var scene = new THREE.Scene();
   //scene.fog = new THREE.FogExp2(0x2a2a2a, 0.0020);
   var LoadingManager = new THREE.LoadingManager();
-  LoadingManager.onProgress = function(item, loaded, total) {
+  LoadingManager.onProgress = function (item, loaded, total) {
       loadedCallback();
   };
-  LoadingManager.onError = function() {
+  LoadingManager.onError = function () {
       alert('Une erreur est survenue :/');
   };
   try {
@@ -73,8 +73,8 @@
           'lmcity_ft.jpg', 'lmcity_bk.jpg',
           'lmcity_up.jpg', 'lmcity_dn.jpg',
           'lmcity_rt.jpg', 'lmcity_lf.jpg'
-      ], function() {
-      console.log("textureCube:ok");
+      ], function () {
+          console.log("textureCube:ok");
           textureCubeSky = textureCube.clone();
           textureCubeSky.needsUpdate = true;
           textureCubeSky.mapping = THREE.CubeRefractionMapping;
@@ -105,16 +105,16 @@
       var informations = [{
           text: "Carosserie faite par usinage, en polystyrene",
           position: {
-              x: 80,
-              y: 80,
-              z: 150
+              x: 90,
+              y: 100,
+              z: -80
           },
           pointTo: {
-              x: 40,
-              y: 50,
-              z: 130
+              x: 35,
+              y: 85,
+              z: -60
           },
-          rotation: Math.PI / 4,
+          rotation: Math.PI/4*3,
           color: 0xff0000
       }, {
           text: "Roues et gentes faites par impression 3D",
@@ -135,10 +135,10 @@
 
 
       var FontLoader = new THREE.FontLoader(LoadingManager);
-      FontLoader.load('javascript/lib/threejs/helvetiker_bold.typeface.js', function(font) {
-              console.log("font:ok");
-          informations.forEach(function() {
-              return function(data) {
+      FontLoader.load('javascript/lib/threejs/helvetiker_bold.typeface.js', function (font) {
+          console.log("font:ok");
+          informations.forEach(function () {
+              return function (data) {
                   //Ligne
                   var material = new THREE.LineBasicMaterial({
                       color: data.color
@@ -159,7 +159,7 @@
                   var geometry = new THREE.TextGeometry(data.text, {
                       font: font,
                       size: 5,
-                      height: 1,
+                      height: 1.2,
                       curveSegments: 3,
                       bevelEnabled: false,
                       bevelThickness: 1,
@@ -193,14 +193,14 @@
           // resource URL
           'https://www.bastien-adam.tk/course-en-cours/voiture.dae',
           // Function when resource is loaded
-          function(collada) {
+          function (collada) {
               voiture = collada.scene;
               voiture.scale.x = voiture.scale.y = voiture.scale.z = 1000;
               voiture.rotation.x = -Math.PI / 2;
               voiture.position.z = 10;
               voiture.updateMatrix();
-              voiture.children.forEach(function(data) {
-                  data.children.forEach(function(mesh) {
+              voiture.children.forEach(function (data) {
+                  data.children.forEach(function (mesh) {
                       mesh.receiveShadow = true;
                       mesh.castShadow = true;
                   });
@@ -218,47 +218,52 @@
               roues.push(voiture.children[8].children[0]);
 
               carroserie = voiture.children[2].children[0];
+              carroserie.material.color = {
+                  r: 0.3,
+                  g: 0.3,
+                  b: 0.3
+              };
               scene.add(voiture);
               loadedCallback();
           }
       );
       //Car audio
 
-            var audioListener = new THREE.AudioListener();
-            camera.add(audioListener);
+      var audioListener = new THREE.AudioListener();
+      camera.add(audioListener);
 
-            startSound = new THREE.Audio(audioListener);
-            scene.add(startSound);
+      startSound = new THREE.Audio(audioListener);
+      scene.add(startSound);
 
-            loopSound = new THREE.Audio(audioListener);
-            loopSound.setLoop(true);
-            scene.add(loopSound);
+      loopSound = new THREE.Audio(audioListener);
+      loopSound.setLoop(true);
+      scene.add(loopSound);
 
-            var loader = new THREE.AudioLoader(LoadingManager);
+      var loader = new THREE.AudioLoader(LoadingManager);
 
-            loader.load(
-                'https://www.bastien-adam.tk/course-en-cours/start.wav',
-                function(audioBuffer) {
-                    startSound.setBuffer(audioBuffer);
-                    console.log("startSound:ok");
-                }
-            );
-            loader.load(
-                'https://www.bastien-adam.tk/course-en-cours/loop.wav',
-                function(audioBuffer) {
-                    loopSound.setBuffer(audioBuffer);
-                                        console.log("loopSound:ok");
-                }
-            );
+      loader.load(
+          'https://www.bastien-adam.tk/course-en-cours/start.mp3',
+          function (audioBuffer) {
+              startSound.setBuffer(audioBuffer);
+              console.log("startSound:ok");
+          }
+      );
+      loader.load(
+          'https://www.bastien-adam.tk/course-en-cours/loop.mp3',
+          function (audioBuffer) {
+              loopSound.setBuffer(audioBuffer);
+              console.log("loopSound:ok");
+          }
+      );
 
-            //renderer
+      //renderer
 
 
-      startRender = function() {
+      startRender = function () {
           carroserie.material.envMap = textureCube;
           carroserie.material.reflectivity = 0.3;
 
-          roues.forEach(function(data) {
+          roues.forEach(function (data) {
               data.material.envMap = textureCube;
               data.material.reflectivity = 0.4;
           });
@@ -266,13 +271,13 @@
           controls.autoRotateSpeed = rotateSpeed = 50 * speedModifier;
           clock = new THREE.Clock();
           startSound.play();
-          loopSoundTimeout = window.setTimeout(function() {
+          loopSoundTimeout = window.setTimeout(function () {
               loopSound.play();
           }, 4033);
       };
       var rotateSpeed = false;
       var deltaTime = 0;
-      render = function() {
+      render = function () {
           if (viewEnable === true) {
               if (typeof clock != "undefined") {
                   var deltaTime = clock.getDelta() * speedModifier;
@@ -286,27 +291,28 @@
                   } else {
                       controls.autoRotateSpeed = rotateSpeed;
                   }
-              } /*else if (exportMode && typeof endRotation == "undefined") {
-                  endRotation = camera.rotation.y;
-                  console.log(camera.rotation.y);
-                  waitingCycle = false;
-              } else if(exportMode) {
-                  if (!waitingCycle) {
-                      if (camera.rotation.y > endRotation) {
-                          waitingCycle = true;
-                      }
-                  } else {
-                      if (camera.rotation.y < endRotation) {
-                          viewEnable = false;
-                          console.log("end at:" + camera.rotation.y);
-                          console.log("Wanted end:" + endRotation);
-                      }
-                  }
-              }*/
+              }
+              /*else if (exportMode && typeof endRotation == "undefined") {
+                               endRotation = camera.rotation.y;
+                               console.log(camera.rotation.y);
+                               waitingCycle = false;
+                           } else if(exportMode) {
+                               if (!waitingCycle) {
+                                   if (camera.rotation.y > endRotation) {
+                                       waitingCycle = true;
+                                   }
+                               } else {
+                                   if (camera.rotation.y < endRotation) {
+                                       viewEnable = false;
+                                       console.log("end at:" + camera.rotation.y);
+                                       console.log("Wanted end:" + endRotation);
+                                   }
+                               }
+                           }*/
               if (typeof carroserie != "undefined" && typeof clock != "undefined") {
                   var cycle = clock.getElapsedTime() * speedModifier;
                   carroserie.position.y = Math.sin(cycle * Math.PI * 12) / 6000;
-                  roues.forEach(function(mesh) {
+                  roues.forEach(function (mesh) {
                       mesh.rotation.x = -cycle * Math.PI;
                   });
               }
@@ -319,10 +325,10 @@
               requestAnimationFrame(render);
           }
       };
-      window.onresize = function() {
-          camera.aspect = window.innerWidth / (window.innerHeight - 50);
+      window.onresize = function () {
+          camera.aspect = window.innerWidth / (presentationMode ? window.innerHeight : (window.innerHeight - 50));
           camera.updateProjectionMatrix();
-          renderer.setSize(window.innerWidth, window.innerHeight - 50);
+          renderer.setSize(window.innerWidth, (presentationMode ? window.innerHeight : (window.innerHeight - 50)));
       };
   } catch (e) {
       console.log(e);
