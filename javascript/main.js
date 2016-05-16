@@ -14,7 +14,7 @@ $(function() {
         if (hash == 'index' || hash == '') {
             if (WebGlWorks) {
                 if (e) {
-                    loopSound.play();
+                    //loopSound.play();
                 }
                 viewEnable = true;
                 render();
@@ -38,9 +38,9 @@ $(function() {
         } else {
             if (WebGlWorks) {
                 viewEnable = false;
-                if (startSound.isPlaying) startSound.stop();
-                if (loopSound.isPlaying) loopSound.stop();
-                window.clearTimeout(loopSoundTimeout);
+                //if (startSound.isPlaying) startSound.stop();
+                //if (loopSound.isPlaying) loopSound.stop();
+                //window.clearTimeout(loopSoundTimeout);
             }
         }
     };

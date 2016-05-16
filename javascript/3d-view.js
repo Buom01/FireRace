@@ -229,32 +229,32 @@
       );
       //Car audio
 
-      var audioListener = new THREE.AudioListener();
-      camera.add(audioListener);
-
-      startSound = new THREE.Audio(audioListener);
-      scene.add(startSound);
-
-      loopSound = new THREE.Audio(audioListener);
-      loopSound.setLoop(true);
-      scene.add(loopSound);
-
-      var loader = new THREE.AudioLoader(LoadingManager);
-
-      loader.load(
-          'https://www.bastien-adam.tk/course-en-cours/start.wav',
-          function (audioBuffer) {
-              startSound.setBuffer(audioBuffer);
-              console.log("startSound:ok");
-          }
-      );
-      loader.load(
-          'https://www.bastien-adam.tk/course-en-cours/loop.wav',
-          function (audioBuffer) {
-              loopSound.setBuffer(audioBuffer);
-              console.log("loopSound:ok");
-          }
-      );
+      // var audioListener = new THREE.AudioListener();
+      // camera.add(audioListener);
+      //
+      // startSound = new THREE.Audio(audioListener);
+      // scene.add(startSound);
+      //
+      // loopSound = new THREE.Audio(audioListener);
+      // loopSound.setLoop(true);
+      // scene.add(loopSound);
+      //
+      // var loader = new THREE.AudioLoader(LoadingManager);
+      //
+      // loader.load(
+      //     'https://www.bastien-adam.tk/course-en-cours/start.wav',
+      //     function (audioBuffer) {
+      //         startSound.setBuffer(audioBuffer);
+      //         console.log("startSound:ok");
+      //     }
+      // );
+      // loader.load(
+      //     'https://www.bastien-adam.tk/course-en-cours/loop.wav',
+      //     function (audioBuffer) {
+      //         loopSound.setBuffer(audioBuffer);
+      //         console.log("loopSound:ok");
+      //     }
+      // );
 
       //renderer
 
@@ -270,10 +270,10 @@
 
           controls.autoRotateSpeed = rotateSpeed = 50 * speedModifier;
           clock = new THREE.Clock();
-          startSound.play();
-          loopSoundTimeout = window.setTimeout(function () {
-              loopSound.play();
-          }, 4033);
+          // startSound.play();
+          // loopSoundTimeout = window.setTimeout(function () {
+          //     loopSound.play();
+          // }, 4033);
       };
       var rotateSpeed = false;
       var deltaTime = 0;
@@ -316,10 +316,10 @@
                       mesh.rotation.x = -cycle * Math.PI;
                   });
               }
-              var volume = ((1000 - camera.position.distanceTo(controls.target)) / 1000) - 0.3;
-              if (volume < 0) volume = 0;
-              startSound.setVolume(volume);
-              loopSound.setVolume(volume);
+              // var volume = ((1000 - camera.position.distanceTo(controls.target)) / 1000) - 0.3;
+              // if (volume < 0) volume = 0;
+              // startSound.setVolume(volume);
+              // loopSound.setVolume(volume);
 
               renderer.render(scene, camera);
               requestAnimationFrame(render);

@@ -16,7 +16,7 @@ if (window.location.hash == "#presentation") {
     presentationMode = false;
 }
 
-var totalFile = (WebGlWorks) ? (16) : 3;
+var totalFile = (WebGlWorks) ? (16-2) : 3;
 var loadedFile = 0;
 var totalElem = document.getElementById('total');
 var loadedElem = document.getElementById('loaded');
