@@ -191,7 +191,7 @@
 
       loader.load(
           // resource URL
-          'https://www.bastien-adam.tk/course-en-cours/voiture.dae',
+          'assets/voiture.dae',
           // Function when resource is loaded
           function (collada) {
               voiture = collada.scene;
